@@ -94,6 +94,8 @@ struct goodix_ts_platform_data {
 	u32 int_sync;
 	u32 driver_send_cfg;
 	u32 swap_x2y;
+	u32 invert_x;
+	u32 invert_y;
 	u32 slide_wakeup;
 	u32 auto_update;
 	u32 auto_update_cfg;

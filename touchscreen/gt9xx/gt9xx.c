@@ -407,6 +407,13 @@ static u8 gtp_get_points(struct goodix_ts_data *ts,
 		if (ts->pdata->swap_x2y)
 			GTP_SWAP(points[i].x, points[i].y);
 
+		if (ts->pdata->invert_x)
+			points[i].x = (signed)(ts->pdata->abs_size_x - points[i].x);
+		
+		if (ts->pdata->invert_y)
+			points[i].y = (signed)(ts->pdata->abs_size_y - points[i].y);
+
+
 		dev_dbg(&ts->client->dev, "[%d][%d %d %d]\n",
 			points[i].id, points[i].x, points[i].y, points[i].p);
 
@@ -1562,6 +1569,14 @@ static int gtp_parse_dt(struct device *dev,
 	of_property_read_u32(np, "goodix,swap-x2y", &pdata->swap_x2y);
 	if (pdata->swap_x2y)
 		dev_info(dev, "swap-x2y enabled\n");
+
+	of_property_read_u32(np, "goodix,invert-x", &pdata->invert_x);
+	if (pdata->invert_x)
+		dev_info(dev, "invert-x enabled\n");
+
+	of_property_read_u32(np, "goodix,invert-y", &pdata->invert_y);
+	if (pdata->invert_y)
+		dev_info(dev, "invert-y enabled\n");
 
 	of_property_read_u32(np, "goodix,slide-wakeup", &pdata->slide_wakeup);
 	if (pdata->slide_wakeup)
