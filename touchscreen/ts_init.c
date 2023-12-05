@@ -35,7 +35,7 @@ extern int xiaomi_msm8937_touchscreen_ist30xx_init(void);
 
 static int __init xiaomi_msm8937_touchscreen_init(void)
 {
-	if (!xiaomi_msm8937_mach_get())
+/*	if (!xiaomi_msm8937_mach_get())
 		return -ENODEV;
 
 #if IS_ENABLED(CONFIG_MACH_FAMILY_XIAOMI_ULYSSE)
@@ -68,6 +68,9 @@ static int __init xiaomi_msm8937_touchscreen_init(void)
 	xiaomi_msm8937_touchscreen_ist30xx_init();
 #endif
 
+	return 0;
+*/
+	xiaomi_msm8937_touchscreen_gtp_init();
 	return 0;
 }
 module_init(xiaomi_msm8937_touchscreen_init);
